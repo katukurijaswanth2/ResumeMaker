@@ -2,7 +2,6 @@ package com.jashwanth.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-
 import java.time.LocalDate;
 
 @Entity
@@ -14,21 +13,27 @@ public class Experience {
     private Long id;
 
     @NotBlank
+    @Column(name = "company", length = 150, nullable = false)
     private String company;
 
     @NotBlank
+    @Column(name = "role", length = 100, nullable = false)
     private String role;
 
+    @Column(name = "location", length = 100)
     private String location;
 
+    @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
 
+    @Column(name = "end_date")
     private LocalDate endDate;
 
+    @Column(name = "currently_working")
     private Boolean currentlyWorking;
 
     @Lob
-    @Column(length = 3000)
+    @Column(name = "description", length = 3000)
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)

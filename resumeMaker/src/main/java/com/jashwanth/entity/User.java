@@ -1,10 +1,8 @@
 package com.jashwanth.entity;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,19 +16,19 @@ public class User {
     private Long id;
 
     @NotBlank
-    @Column(nullable = false, unique = true)
+    @Column(name = "username", length = 50, nullable = false, unique = true)
     private String username;
 
     @NotBlank
     @Email
-    @Column(nullable = false, unique = true)
+    @Column(name = "email", length = 100, nullable = false, unique = true)
     private String email;
 
     @NotBlank
-    @Column(nullable = false)
+    @Column(name = "password", length = 255, nullable = false)
     private String password;
 
-    @Column(updatable = false)
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -124,7 +122,7 @@ public class User {
         resume.setUser(null);
     }
 
-    // ---------- equals / hashCode (based on id only) ----------
+    // ---------- equals / hashCode ----------
 
     @Override
     public boolean equals(Object o) {
@@ -148,4 +146,3 @@ public class User {
                 '}';
     }
 }
-

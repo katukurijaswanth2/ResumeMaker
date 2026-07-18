@@ -15,9 +15,11 @@ public class Skill {
     private Long id;
 
     @NotBlank
+    @Column(name = "name", length = 100, nullable = false)
     private String name;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "proficiency_level", length = 20, nullable = false)
     private ProficiencyLevel level;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -103,8 +105,7 @@ public class Skill {
                 '}';
     }
 
-    // ---------- Enum ----------
-
+    // ---------- Enum (Better to keep in separate file later) ----------
     public enum ProficiencyLevel {
         BEGINNER,
         INTERMEDIATE,

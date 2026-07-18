@@ -3,7 +3,6 @@ package com.jashwanth.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,26 +16,33 @@ public class Resume {
     private Long id;
 
     @NotBlank
+    @Column(name = "full_name", length = 150, nullable = false)
     private String fullName;
 
     @Email
+    @Column(name = "email", length = 100, nullable = false, unique = true)
     private String email;
 
+    @Column(name = "phone", length = 20)
     private String phone;
 
+    @Column(name = "address", length = 300)
     private String address;
 
+    @Column(name = "linkedin_url", length = 200)
     private String linkedInUrl;
 
+    @Column(name = "github_url", length = 200)
     private String githubUrl;
 
     @Lob
-    @Column(length = 2000)
+    @Column(name = "summary", length = 2000)
     private String summary;
 
-    @Column(updatable = false)
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -210,7 +216,7 @@ public class Resume {
         this.skills = skills;
     }
 
-    // ---------- Helper methods to keep both sides in sync ----------
+    // ---------- Helper methods ----------
 
     public void addEducation(Education edu) {
         education.add(edu);
@@ -242,7 +248,7 @@ public class Resume {
         skill.setResume(null);
     }
 
-    // ---------- equals / hashCode ----------
+    // ---------- equals / hashCode / toString ----------
 
     @Override
     public boolean equals(Object o) {

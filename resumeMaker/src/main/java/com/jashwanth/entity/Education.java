@@ -2,7 +2,6 @@ package com.jashwanth.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-
 import java.time.LocalDate;
 
 @Entity
@@ -14,30 +13,37 @@ public class Education {
     private Long id;
 
     @NotBlank
+    @Column(name = "institution", length = 150, nullable = false)
     private String institution;
 
     @NotBlank
+    @Column(name = "degree", length = 100, nullable = false)
     private String degree;
 
+    @Column(name = "field_of_study", length = 100)
     private String fieldOfStudy;
 
+    @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
 
+    @Column(name = "end_date")
     private LocalDate endDate;
 
+    @Column(name = "currently_studying")
     private Boolean currentlyStudying;
 
+    @Column(name = "gpa", precision = 3, scale = 2)
     private Double gpa;
 
     @Lob
-    @Column(length = 1000)
+    @Column(name = "description", length = 1000)
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "resume_id", nullable = false)
     private Resume resume;
 
-    // Constructors
+    // ---------- Constructors ----------
 
     public Education() {
     }
@@ -51,9 +57,8 @@ public class Education {
         this.endDate = endDate;
     }
 
-    public Education(Long id, String institution, String degree,
-                     String fieldOfStudy, LocalDate startDate,
-                     LocalDate endDate, Boolean currentlyStudying,
+    public Education(Long id, String institution, String degree, String fieldOfStudy,
+                     LocalDate startDate, LocalDate endDate, Boolean currentlyStudying,
                      Double gpa, String description, Resume resume) {
         this.id = id;
         this.institution = institution;
@@ -67,7 +72,7 @@ public class Education {
         this.resume = resume;
     }
 
-    // Getters and Setters
+    // ---------- Getters and Setters ----------
 
     public Long getId() {
         return id;
@@ -148,6 +153,8 @@ public class Education {
     public void setResume(Resume resume) {
         this.resume = resume;
     }
+
+    // ---------- equals / hashCode ----------
 
     @Override
     public boolean equals(Object o) {
