@@ -6,9 +6,10 @@ import com.jashwanth.entity.*;
 import com.jashwanth.repository.ResumeRepository;
 import com.jashwanth.repository.UserRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class ResumeServiceImpl implements  ResumeService {
     private final ResumeRepository resumeRepository;
     private final UserRepository userRepository;
